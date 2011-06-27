@@ -20,8 +20,8 @@ set shiftround
 set autoindent
 
 " smartindent after beginning a block
-set smartindent
-au BufEnter,BufRead *.py setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+"set smartindent
+"au BufEnter,BufRead *.py setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 " set tabs to eight characters wide
 " http://docs.python.org/reference/lexical_analysis.html#indentation
@@ -44,7 +44,7 @@ filetype on
 " automatically indent based on file type
 filetype indent on
 
-" automaticaly enuble plugin by file type
+" automaticaly enable plugin by file type
 filetype plugin on
 
 " Json
