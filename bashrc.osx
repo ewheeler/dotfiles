@@ -1,3 +1,6 @@
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
 shopt -s histappend
@@ -9,4 +12,28 @@ alias ls='ls -G'
 alias rmpyc='find . -name "*.pyc" -exec rm {} \;'
 alias bitch,='sudo'
 alias flushdns='dscacheutil -flushcache'
+alias stopredis='launchctl unload -w ~/Library/LaunchAgents/io.redis.redis-server.plist'
+alias startredis='launchctl load -w ~/Library/LaunchAgents/io.redis.redis-server.plist'
 alias datamine='ssh -L 5984:localhost:5984 conductor@datamine.txteagle.com'
+## Archives
+# Extract about anything
+extract () {
+	if [ -f $1 ] ; then
+		case $1 in
+			*.tar.bz2)   tar xvjf $1   ;;
+			*.tar.gz)    tar xvzf $1   ;;
+			*.bz2)       bunzip2 $1    ;;
+			*.rar)       unrar x $1    ;;
+			*.gz)        gunzip $1     ;;
+			*.tar)       tar xvf $1    ;;
+			*.tbz2)      tar xvjf $1   ;;
+			*.tgz)       tar xvzf $1   ;;
+			*.zip)       unzip $1      ;;
+			*.Z)         uncompress $1 ;;
+			*.7z)        7z x $1       ;;
+			*)           echo "'$1' cannot be extracted via >extract<" ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
+}
