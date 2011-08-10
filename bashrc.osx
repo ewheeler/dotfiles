@@ -7,7 +7,7 @@ export HISTCONTROL=erasedups
 export HISTSIZE=10000
 export ARCHFLAGS='-arch i386 -arch x86_64'
 export EDITOR=vim
-export PS1='\[\n\033[31;37m\]\h\[[\w]\$ \[\033[0m\]'
+export PS1='\n\033[31;37m\h[\w]\$ \033[0m'
 export LSCOLORS=DxGxcxdxBxegedabagacad
 
 shopt -s histappend
