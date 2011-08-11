@@ -1,7 +1,8 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export PATH=/usr/local/Cellar/python/2.7.2/bin/:$PATH
+export PATH=/usr/local/Cellar/ruby/1.9.2-p290/bin:$PATH
+export PATH=/usr/local/Cellar/python/2.7.2/bin:$PATH
 export PATH=/usr/local/share/python:$PATH
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
