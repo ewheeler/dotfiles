@@ -8,7 +8,7 @@ export HISTCONTROL=erasedups
 export HISTSIZE=10000
 export ARCHFLAGS='-arch i386 -arch x86_64'
 export EDITOR=vim
-export PS1='\n\033[31;37m\h[\w]\$ \033[0m'
+export PS1='\[\033[31;37m\]\h[\w]\$ \[\033[0m\]'
 export LSCOLORS=DxGxcxdxBxegedabagacad
 
 shopt -s histappend
@@ -22,6 +22,7 @@ alias stopredis='launchctl unload -w ~/Library/LaunchAgents/io.redis.redis-serve
 alias startredis='launchctl load -w ~/Library/LaunchAgents/io.redis.redis-server.plist'
 alias datamine='ssh -L 5984:localhost:5984 conductor@datamine.txteagle.com'
 alias vaxlg='ssh -i ewheeler.pem ubuntu@ec2-50-17-51-57.compute-1.amazonaws.com'
+alias serve='python -m SimpleHTTPServer'
 
 # Extract about anything
 extract () {
