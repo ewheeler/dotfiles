@@ -16,8 +16,16 @@ set smartcase
 " round alignment to nearest indent when shifting with < and >
 set shiftround
 
+" save buffers
+set autowrite
+
+" turn off backup, swps
+set nobackup
+set nowb
+set noswapfile
+
 " keep indentation from previous line
-set autoindent
+"set autoindent
 
 " smartindent after beginning a block
 "set smartindent
@@ -25,53 +33,75 @@ set autoindent
 
 " set tabs to eight characters wide
 " http://docs.python.org/reference/lexical_analysis.html#indentation
-au BufRead,BufNewFile *.py,*.pyw set tabstop=8
+au BufRead,BufNewFile *.py,*.pyw setlocal tabstop=8
 
 " expand tabs into 4 spaces
-au BufRead,BufNewFile *.py,*.pyw set expandtab
-au BufRead,BufNewFile *.py,*.pyw set softtabstop=4
+au BufRead,BufNewFile *.py,*.pyw setlocal expandtab
+au BufRead,BufNewFile *.py,*.pyw setlocal softtabstop=4
 
 " allow use of < and > to indent or unindent blocks in visual mode
-au BufRead,BufNewFile *.py,*.pyw set shiftwidth=4
+au BufRead,BufNewFile *.py,*.pyw setlocal shiftwidth=4
 
-au BufRead,BufNewFile *.py set syntax=python
+au BufRead,BufNewFile *.py setlocal syntax=python
 
 " full syntax highlighting
 let python_highlight_all=1
 set syntax=on
+syntax on
 filetype on
 
 " automatically indent based on file type
-filetype indent on
+"filetype indent on
 
 " automaticaly enable plugin by file type
 filetype plugin on
 
-" Json
-au! BufRead,BufNewFile *.json setfiletype json
-
 " get rid of vi compatible keys
 set nocompatible
 
-" switch between buffere
+" switch between buffers
 " without saving them
-set hidden
+"set hidden
 
 " always show tab bar, even when not in use,
 " to remind me to use it instead of buffers
 set showtabline=2
 
-" syntax highlighting on
-syntax on
-
 " highlight bad whitespace
 highlight BadWhitespace ctermbg=red guibg=red
 
 " Display tabs at the beginning of a line in Python mode as bad.
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+autocmd FileType python match BadWhitespace /^\t\+/
 
 " Make trailing whitespace be flagged as bad.
 match BadWhitespace /\s\+$/
+
+" HTML (tab width 2 chr, no wrapping)
+autocmd FileType html setlocal sw=2
+autocmd FileType html setlocal ts=2
+autocmd FileType html setlocal sts=2
+autocmd FileType html setlocal textwidth=0
+
+" XHTML (tab width 2 chr, no wrapping)
+autocmd FileType xhtml setlocal sw=2
+autocmd FileType xhtml setlocal ts=2
+autocmd FileType xhtml setlocal sts=2
+autocmd FileType xhtml setlocal textwidth=0
+
+" CSS (tab width 2 chr, wrap at 79th char)
+autocmd FileType css setlocal sw=2
+autocmd FileType css setlocal ts=2
+autocmd FileType css setlocal sts=2
+
+" JavaScript (tab width 4 chr, wrap at 79th)
+autocmd FileType javascript setlocal sw=4
+autocmd FileType javascript setlocal ts=4
+autocmd FileType javascript setlocal sts=4
+autocmd FileType javascript setlocal textwidth=79
+
+" Json
+au! BufRead,BufNewFile *.json setfiletype json
+
 
 " use pastel colors because my terminal background is dark
 set background=dark
