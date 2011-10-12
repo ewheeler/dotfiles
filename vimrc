@@ -1,3 +1,25 @@
+" Stuff i want to remember:
+"
+" comment out all lines containing log or Log
+" :g/log\|Log/s/^/#/g
+"
+" remove all the ^M in a file
+" :%s/\ r//g
+"
+" remove all the ^M in a file (that are at the end of lines)
+" :%s/\ r$//g
+"
+"/\%>80v.\+ with search highlighting (:set hlsearch) will highlight any text after column 80.
+"
+":%s//joe/igc substitute your last search with joe.
+
+" set terminal title to file title
+"set title
+
+" change into directory of current buffer so :e is always relative to current
+" file
+"set autochdir
+
 " disable word wrap
 set nowrap
 
@@ -6,6 +28,8 @@ set encoding=utf-8
 
 " Show menu with possible tab completions
 set wildmenu
+set wildignore=*.dll,*.o,*.pyc,*.bak,*.exe,*.jpg,*.jpeg,*.png,*.gif,*$py.class,*.class
+set wildmode=list:full
 
 " ignore case when searching (see smartcase)
 set ignorecase
@@ -28,8 +52,8 @@ set noswapfile
 "set autoindent
 
 " smartindent after beginning a block
-"set smartindent
-"au BufEnter,BufRead *.py setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+set smartindent
+au BufEnter,BufRead *.py setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 " set tabs to eight characters wide
 " http://docs.python.org/reference/lexical_analysis.html#indentation
@@ -61,7 +85,7 @@ set nocompatible
 
 " switch between buffers
 " without saving them
-"set hidden
+set hidden
 
 " always show tab bar, even when not in use,
 " to remind me to use it instead of buffers
@@ -92,15 +116,16 @@ autocmd FileType xhtml setlocal textwidth=0
 autocmd FileType css setlocal sw=2
 autocmd FileType css setlocal ts=2
 autocmd FileType css setlocal sts=2
+autocmd FileType css setlocal textwidth=79
 
 " JavaScript (tab width 4 chr, wrap at 79th)
 autocmd FileType javascript setlocal sw=4
 autocmd FileType javascript setlocal ts=4
 autocmd FileType javascript setlocal sts=4
 autocmd FileType javascript setlocal textwidth=79
+autocmd BufNewFile,BufRead *.json setlocal ft=javascript
+let javascript_enable_domhtmlcss=1
 
-" Json
-au! BufRead,BufNewFile *.json setfiletype json
 
 
 " use pastel colors because my terminal background is dark
