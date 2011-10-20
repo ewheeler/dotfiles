@@ -3,6 +3,12 @@
 " comment out all lines containing log or Log
 " :g/log\|Log/s/^/#/g
 "
+" comment out a visually selected block
+" s/^/#
+"
+" uncomment a visually selected block
+" s/^#//
+"
 " remove all the ^M in a file
 " :%s/\ r//g
 "
