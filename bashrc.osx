@@ -1,6 +1,9 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# i always forget this
+# find . | xargs grep -s foo
+
 # add non-system-installed python/ruby to path
 export PATH=/usr/local/Cellar/ruby/1.9.2-p290/bin:$PATH
 export PATH=/usr/local/Cellar/python/2.7.2/bin:$PATH
@@ -13,6 +16,7 @@ export ARCHFLAGS='-arch i386 -arch x86_64'
 export EDITOR=vim
 export PS1='\[\033[31;37m\]\h[\w]\$ \[\033[0m\]'
 export LSCOLORS=DxGxcxdxBxegedabagacad
+export LC_CTYPE="utf-8"
 shopt -s histappend
 stty -echoctl
 
@@ -22,6 +26,8 @@ alias rmpyc='find . -name "*.pyc" -exec rm {} \;'
 alias bitch,='sudo'
 alias flushdns='dscacheutil -flushcache'
 alias serve='python -m SimpleHTTPServer'
+alias spark='~/dev/spark/spark'
+alias fixgems="sed -i 's/ 00:00:00.000000000Z//' /var/lib/gems/1.8/specifications/*"
 
 # shortcuts for starting/stopping services
 alias stopredis='launchctl unload -w ~/Library/LaunchAgents/io.redis.redis-server.plist'
@@ -30,7 +36,9 @@ alias stopmysql='launchctl unload -w ~/Library/LaunchAgents/com.mysql.mysqld.pli
 alias startmysql='launchctl load -w ~/Library/LaunchAgents/com.mysql.mysqld.plist'
 
 # shortcuts for remote machines
-alias datamine='ssh -L 5984:localhost:5984 conductor@datamine.txteagle.com'
+alias datamine='ssh -L 5983:localhost:5984 ubuntu@datamine.txteagle.com'
+alias ucmp='ssh -L 5983:localhost:5984 ubuntu@ucmp.txteagle.com'
+alias pdb2='ssh -L 5983:localhost:5984 conductor@pdb2.txteagle.com'
 alias vaxlg='ssh -i ewheeler.pem ubuntu@ec2-50-17-51-57.compute-1.amazonaws.com'
 alias nimrod='ssh -L 5983:localhost:5984 root@keno.com.ng'
 
@@ -38,6 +46,9 @@ alias nimrod='ssh -L 5983:localhost:5984 root@keno.com.ng'
 alias t='/usr/local/bin/todo.sh -d ~/.todo.cfg'
 alias tls='/usr/local/bin/todo.sh -d ~/.todo.cfg ls'
 alias tadd='/usr/local/bin/todo.sh -d ~/.todo.cfg add'
+
+# alias to site-packages
+alias sp='cd /usr/local/Cellar/python/2.7.2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages'
 
 # Extract about anything
 extract () {
