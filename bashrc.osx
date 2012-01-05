@@ -1,11 +1,26 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# i always forget this
+# for reference:
+
+# Search for something
 # find . | xargs grep -s foo
 
+# Show connections based on the host and the port using @host:port
+# lsof -i@192.168.1.5:22
+
+# Show what a given user has open using -u
+# lsof -u daniel
+
+# See what files and network connections a command is using with -c or pid with -p
+# lsof -c syslog-ng
+# lsof -p 10075
+
+# Pointing to a file shows what's interacting with that file
+# lsof /var/log/messages
+
 # add non-system-installed python/ruby to path
-export PATH=/usr/local/Cellar/ruby/1.9.2-p290/bin:$PATH
+export PATH=/usr/local/Cellar/ruby/1.9.3-p0/bin:$PATH
 export PATH=/usr/local/Cellar/python/2.7.2/bin:$PATH
 export PATH=/usr/local/share/python:$PATH
 export NODE_PATH=/usr/local/lib/node_modules
@@ -14,11 +29,19 @@ export HISTCONTROL=erasedups
 export HISTSIZE=10000
 export ARCHFLAGS='-arch i386 -arch x86_64'
 export EDITOR=vim
-export PS1='\[\033[31;37m\]\h[\w]\$ \[\033[0m\]'
 export LSCOLORS=DxGxcxdxBxegedabagacad
 export LC_CTYPE="utf-8"
 shopt -s histappend
 stty -echoctl
+
+# add git completion
+source /usr/local/etc/bash_completion.d/git-completion.bash
+
+# prompt stuff
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUPSTREAM="auto"
+#export PS1='\[\033[31;37m\]\h[\w]\$ \[\033[0m\]'
+export PS1='\[\033[31;37m\]\h[\w]$(__git_ps1 " (%s)")\$ \[\033[0m\]'
 
 # little utilities/niceities
 alias ls='ls -G'
@@ -28,12 +51,15 @@ alias flushdns='dscacheutil -flushcache'
 alias serve='python -m SimpleHTTPServer'
 alias spark='~/dev/spark/spark'
 alias fixgems="sed -i 's/ 00:00:00.000000000Z//' /var/lib/gems/1.8/specifications/*"
+alias gl="git log --graph --pretty=\"format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset\""
 
 # shortcuts for starting/stopping services
 alias stopredis='launchctl unload -w ~/Library/LaunchAgents/io.redis.redis-server.plist'
 alias startredis='launchctl load -w ~/Library/LaunchAgents/io.redis.redis-server.plist'
 alias stopmysql='launchctl unload -w ~/Library/LaunchAgents/com.mysql.mysqld.plist'
 alias startmysql='launchctl load -w ~/Library/LaunchAgents/com.mysql.mysqld.plist'
+alias stopcouch='launchctl unload -w ~/Library/LaunchAgents/org.apache.couchdb.plist'
+alias startcouch='launchctl load -w ~/Library/LaunchAgents/org.apache.couchdb.plist'
 
 # shortcuts for remote machines
 alias datamine='ssh -L 5983:localhost:5984 ubuntu@datamine.txteagle.com'
@@ -41,6 +67,7 @@ alias ucmp='ssh -L 5983:localhost:5984 ubuntu@ucmp.txteagle.com'
 alias pdb2='ssh -L 5983:localhost:5984 conductor@pdb2.txteagle.com'
 alias vaxlg='ssh -i ewheeler.pem ubuntu@ec2-50-17-51-57.compute-1.amazonaws.com'
 alias nimrod='ssh -L 5983:localhost:5984 root@keno.com.ng'
+alias sliderule='ssh -L 5983:localhost:5984 ewheeler@sliderule.dyndns.org'
 
 # shortcuts for todo-txt
 alias t='/usr/local/bin/todo.sh -d ~/.todo.cfg'
