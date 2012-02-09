@@ -28,6 +28,9 @@ export LC_CTYPE=en_US.UTF-8
 shopt -s histappend
 stty -echoctl
 
+# add git completion
+source /etc/bash_completion.d/git
+
 # prompt stuff
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWUPSTREAM="auto"
