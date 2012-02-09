@@ -76,7 +76,6 @@ au BufRead,BufNewFile *.py setlocal syntax=python
 
 " full syntax highlighting
 let python_highlight_all=1
-set syntax=on
 syntax on
 filetype on
 
