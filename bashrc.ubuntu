@@ -1,0 +1,67 @@
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# for reference:
+
+# Search for something
+# find . | xargs grep -s foo
+
+# Show connections based on the host and the port using @host:port
+# lsof -i@192.168.1.5:22
+
+# Show what a given user has open using -u
+# lsof -u daniel
+
+# See what files and network connections a command is using with -c or pid with -p
+# lsof -c syslog-ng
+# lsof -p 10075
+
+# Pointing to a file shows what's interacting with that file
+# lsof /var/log/messages
+
+export HISTCONTROL=erasedups
+export HISTSIZE=10000
+export EDITOR=vim
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+shopt -s histappend
+stty -echoctl
+
+# prompt stuff
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUPSTREAM="auto"
+#export PS1='\[\033[31;37m\]\h[\w]\$ \[\033[0m\]'
+export PS1='\[\033[31;37m\]\h[\w]$(__git_ps1 " (%s)")\$ \[\033[0m\]'
+
+# enable color support of ls and also add handy aliases
+if [ "$TERM" != "dumb" ]; then
+    eval "`dircolors -b`"
+    alias ls='ls --color=auto'
+fi
+
+alias rmpyc='find . -name "*.pyc" -exec rm {} \;'
+alias bitch,='sudo'
+alias serve='python -m SimpleHTTPServer'
+
+# Extract about anything
+extract () {
+	if [ -f $1 ] ; then
+		case $1 in
+			*.tar.bz2)   tar xvjf $1   ;;
+			*.tar.gz)    tar xvzf $1   ;;
+			*.bz2)       bunzip2 $1    ;;
+			*.rar)       unrar x $1    ;;
+			*.gz)        gunzip $1     ;;
+			*.tar)       tar xvf $1    ;;
+			*.tbz2)      tar xvjf $1   ;;
+			*.tgz)       tar xvzf $1   ;;
+			*.zip)       unzip $1      ;;
+			*.Z)         uncompress $1 ;;
+			*.7z)        7z x $1       ;;
+			*)           echo "'$1' cannot be extracted via >extract<" ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
+}
