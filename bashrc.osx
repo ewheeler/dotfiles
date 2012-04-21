@@ -12,6 +12,9 @@
 # Show what a given user has open using -u
 # lsof -u daniel
 
+# Show what is using a file
+# sudo lsof -V | grep libsmime3.dylib
+
 # See what files and network connections a command is using with -c or pid with -p
 # lsof -c syslog-ng
 # lsof -p 10075
