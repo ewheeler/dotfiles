@@ -12,15 +12,20 @@
 # Show what a given user has open using -u
 # lsof -u daniel
 
-# Show what is using a file
-# sudo lsof -V | grep libsmime3.dylib
-
 # See what files and network connections a command is using with -c or pid with -p
 # lsof -c syslog-ng
 # lsof -p 10075
 
 # Pointing to a file shows what's interacting with that file
 # lsof /var/log/messages
+
+# Print bad things from a log
+# cat mylog.log | awk '/[eE]xception|ERROR/ {$1=$2=""; print FNR $0}'
+# cat mylog.log | awk '/ERROR/ {$1=$2=""; print FNR $0}'
+
+# List filenames and total number of bad things in each
+# for FILE in $(ls); do awk '/[eE]xception|ERROR/ { n++ }; END {print FILENAME" "n+0}' $FILE; done
+# for FILE in $(ls); do awk '/ERROR/ { n++ }; END {print FILENAME" "n+0}' $FILE; done
 
 # add non-system-installed python/ruby to path
 export PATH=/usr/local/Cellar/ruby/1.9.3-p125/bin:$PATH
