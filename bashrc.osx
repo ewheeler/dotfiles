@@ -29,7 +29,7 @@
 
 # add non-system-installed python/ruby to path
 export PATH=/usr/local/Cellar/ruby/1.9.3-p125/bin:$PATH
-export PATH=/usr/local/Cellar/python/2.7.2/bin:$PATH
+export PATH=/usr/local/Cellar/python/2.7.3/bin:$PATH
 export PATH=/usr/local/share/python:$PATH
 export NODE_PATH=/usr/local/lib/node_modules
 
