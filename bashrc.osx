@@ -41,6 +41,7 @@ export LSCOLORS=DxGxcxdxBxegedabagacad
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
+export DYLD_LIBRARY_PATH=/usr/lib/
 shopt -s histappend
 stty -echoctl
 
@@ -78,6 +79,8 @@ alias stopcouch='launchctl unload -w ~/Library/LaunchAgents/org.apache.couchdb.p
 alias startcouch='launchctl load -w ~/Library/LaunchAgents/org.apache.couchdb.plist'
 alias stopmongo='launchctl unload -w ~/Library/LaunchAgents/org.mongodb.mongod.plist'
 alias startmongo='launchctl load -w ~/Library/LaunchAgents/org.mongodb.mongod.plist'
+alias startpostgres='launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
+alias stoppostgres='launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
 
 # shortcuts for remote machines
 alias datamine='ssh -L 5983:localhost:5984 ubuntu@datamine.txteagle.com'
@@ -98,6 +101,12 @@ alias tadd='/usr/local/bin/todo.sh -d ~/.todo.cfg add'
 
 # alias to site-packages
 alias sp='cd /usr/local/Cellar/python/2.7.2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages'
+
+# amazon
+export JAVA_HOME="$(/usr/libexec/java_home)"
+export EC2_PRIVATE_KEY="$(/bin/ls "$HOME"/.ec2/pk-*.pem | /usr/bin/head -1)"
+export EC2_CERT="$(/bin/ls "$HOME"/.ec2/cert-*.pem | /usr/bin/head -1)"
+export EC2_AMITOOL_HOME="/usr/local/Library/LinkedKegs/ec2-ami-tools/jars"
 
 # Extract about anything
 extract () {
