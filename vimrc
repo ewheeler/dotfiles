@@ -18,6 +18,16 @@
 "/\%>80v.\+ with search highlighting (:set hlsearch) will highlight any text after column 80.
 "
 ":%s//joe/igc substitute your last search with joe.
+"
+"
+"To change two vertically split windows to horizonally split
+"
+"    ^Wt^WK
+"Horizontally to vertically:
+"
+"        ^Wt^WH
+
+
 
 " set terminal title to file title
 "set title
@@ -25,6 +35,19 @@
 " change into directory of current buffer so :e is always relative to current
 " file
 "set autochdir
+
+" enable pathogen
+" Pathogen load
+filetype off
+
+call pathogen#infect()
+call pathogen#helptags()
+
+filetype plugin indent on
+syntax on
+
+" Disable python folding
+let g:pymode_folding = 0
 
 " disable word wrap
 set nowrap
@@ -76,11 +99,9 @@ au BufRead,BufNewFile *.py setlocal syntax=python
 
 " full syntax highlighting
 let python_highlight_all=1
-syntax on
-filetype on
 
 " automatically indent based on file type
-"filetype indent on
+filetype indent on
 
 " automaticaly enable plugin by file type
 filetype plugin on
@@ -124,9 +145,9 @@ autocmd FileType css setlocal sts=2
 autocmd FileType css setlocal textwidth=79
 
 " JavaScript (tab width 4 chr, wrap at 79th)
-autocmd FileType javascript setlocal sw=4
-autocmd FileType javascript setlocal ts=4
-autocmd FileType javascript setlocal sts=4
+autocmd FileType javascript setlocal sw=2
+autocmd FileType javascript setlocal ts=2
+autocmd FileType javascript setlocal sts=2
 autocmd FileType javascript setlocal textwidth=79
 autocmd BufNewFile,BufRead *.json setlocal ft=javascript
 let javascript_enable_domhtmlcss=1
