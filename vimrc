@@ -156,6 +156,8 @@ let javascript_enable_domhtmlcss=1
 
 " use pastel colors because my terminal background is dark
 set background=dark
+colorscheme solarized
 
 " show line numbers and percentages when scrolling around
 set ruler
+set number
