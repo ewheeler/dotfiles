@@ -61,7 +61,9 @@ alias trackreleases='git fetch; for REMOTE in `git branch -r | grep release `; d
 source /usr/local/etc/bash_completion.d/git-completion.bash
 source /usr/local/etc/bash_completion.d/git-prompt.sh
 # add virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/share/python/virtualenvwrapper.sh
+alias linkproject='setvirtualenvproject $VIRTUAL_ENV $(pwd)'
 # add pip completion
 _pip_completion()
 {
