@@ -131,6 +131,8 @@ autocmd FileType html setlocal sw=2
 autocmd FileType html setlocal ts=2
 autocmd FileType html setlocal sts=2
 autocmd FileType html setlocal textwidth=0
+" http://morearty.com/blog/2013/01/22/fixing-vims-indenting-of-html-files.html
+autocmd FileType html setlocal indentkeys-=*<Return>
 
 " XHTML (tab width 2 chr, no wrapping)
 autocmd FileType xhtml setlocal sw=2
