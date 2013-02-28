@@ -84,6 +84,7 @@ export PS1='\[\033[31;37m\]\h[\w]$(__git_ps1 " (%s)")\$ \[\033[0m\]'
 # little utilities/niceities
 alias ls='ls -G'
 alias rmpyc='find . -name "*.pyc" -exec rm {} \;'
+alias rmdsstores='find . -name .DS_Store -print0 | xargs -0 git rm --ignore-unmatch'
 #alias rmpyc='find . -name "*.pyc"| xargs rm'
 alias bitch,='sudo'
 alias flushdns='dscacheutil -flushcache'
