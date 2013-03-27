@@ -154,6 +154,9 @@ autocmd FileType javascript setlocal textwidth=79
 autocmd BufNewFile,BufRead *.json setlocal ft=javascript
 let javascript_enable_domhtmlcss=1
 
+" Python
+autocmd FileType python setlocal  textwidth=79
+autocmd FileType python setlocal  colorcolumn=80
 
 
 " use pastel colors because my terminal background is dark
