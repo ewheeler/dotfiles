@@ -48,16 +48,17 @@ export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 # temporary fix until i rebuild python
 # https://github.com/mxcl/homebrew/issues/17312
-export DYLD_LIBRARY_PATH=/usr/local/Cellar/sqlite/3.7.15.2/lib:$DYLD_LIBRARY_PATH
+#export DYLD_LIBRARY_PATH=/usr/local/Cellar/sqlite/3.7.15.2/lib:$DYLD_LIBRARY_PATH
 shopt -s histappend
 stty -echoctl
 
 # use homebrew-installed MacVim
 alias vim='mvim -v'
 
-# git flow helpers
+# git helpers
 alias trackfeatures='git fetch; for REMOTE in `git branch -r | grep feature `; do git checkout --track $REMOTE; done;'
 alias trackreleases='git fetch; for REMOTE in `git branch -r | grep release `; do git checkout --track $REMOTE; done;'
+alias trackremotes='git fetch; for REMOTE in `git branch -r`; do git checkout --track $REMOTE; done;'
 
 # add git completion
 source /usr/local/etc/bash_completion.d/git-completion.bash
@@ -123,6 +124,7 @@ alias revere='ssh -p9 -levan 70.91.220.107'
 alias reverecouch='ssh -p9 -levan -L 5983:localhost:5984 70.91.220.107'
 alias air='ssh -L 8891:localhost:8891 conductor@air.txteagle.com'
 alias dev3='ssh -L 8891:localhost:8891 conductor@dev3.txteagle.com'
+# 208.82.103.111
 
 # shortcuts for todo-txt
 alias t='/usr/local/bin/todo.sh -d $HOME/.todo.cfg'
