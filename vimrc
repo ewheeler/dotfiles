@@ -1,3 +1,4 @@
+let $PYTHONHOME='/usr/local/bin/python'
 " Stuff i want to remember:
 "
 " comment out all lines containing log or Log
@@ -14,8 +15,6 @@
 "
 " remove all the ^M in a file (that are at the end of lines)
 " :%s/\ r$//g
-"
-"/\%>80v.\+ with search highlighting (:set hlsearch) will highlight any text after column 80.
 "
 ":%s//joe/igc substitute your last search with joe.
 "
@@ -77,6 +76,9 @@ set nobackup
 set nowb
 set noswapfile
 
+" auto load files if vim detects they have been changed outside of Vim
+set autoread
+
 " keep indentation from previous line
 "set autoindent
 
@@ -109,6 +111,23 @@ filetype plugin on
 " get rid of vi compatible keys
 set nocompatible
 
+" now that i'm using homebrew's vim (instead of osx' or homebrew's macvim),
+" need to map the delete key to my preferred behavior.
+" http://vim.wikia.com/wiki/Backspace_and_delete_problems
+func Backspace()
+  if col('.') == 1
+    if line('.')  != 1
+      return  "\<ESC>kA\<Del>"
+    else
+      return ""
+    endif
+  else
+    return "\<Left>\<Del>"
+  endif
+endfunc
+
+inoremap <BS> <c-r>=Backspace()<CR>
+
 " switch between buffers
 " without saving them
 set hidden
@@ -126,11 +145,23 @@ autocmd FileType python match BadWhitespace /^\t\+/
 " Make trailing whitespace be flagged as bad.
 match BadWhitespace /\s\+$/
 
+" highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+"remove all trailing whitespace
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<cr>
+
 " HTML (tab width 2 chr, no wrapping)
 autocmd FileType html setlocal sw=2
 autocmd FileType html setlocal ts=2
 autocmd FileType html setlocal sts=2
 autocmd FileType html setlocal textwidth=0
+autocmd FileType html setlocal expandtab
 " http://morearty.com/blog/2013/01/22/fixing-vims-indenting-of-html-files.html
 autocmd FileType html setlocal indentkeys-=*<Return>
 
@@ -139,19 +170,24 @@ autocmd FileType xhtml setlocal sw=2
 autocmd FileType xhtml setlocal ts=2
 autocmd FileType xhtml setlocal sts=2
 autocmd FileType xhtml setlocal textwidth=0
+autocmd FileType xhtml setlocal expandtab
 
 " CSS (tab width 2 chr, wrap at 79th char)
 autocmd FileType css setlocal sw=2
 autocmd FileType css setlocal ts=2
 autocmd FileType css setlocal sts=2
 autocmd FileType css setlocal textwidth=79
+autocmd FileType css setlocal expandtab
 
-" JavaScript (tab width 4 chr, wrap at 79th)
+" treat json like js
+autocmd BufNewFile,BufRead *.json setlocal ft=javascript
+
+" JavaScript (tab width 2 chr, wrap at 79th)
 autocmd FileType javascript setlocal sw=2
 autocmd FileType javascript setlocal ts=2
 autocmd FileType javascript setlocal sts=2
 autocmd FileType javascript setlocal textwidth=79
-autocmd BufNewFile,BufRead *.json setlocal ft=javascript
+autocmd FileType javascript setlocal expandtab
 let javascript_enable_domhtmlcss=1
 
 " Python
@@ -166,3 +202,7 @@ colorscheme solarized
 " show line numbers and percentages when scrolling around
 set ruler
 set number
+
+" fix slight delay after pressing ESC then O
+" https://github.com/jackfranklin/dotfiles/blob/master/.vimrc#L159
+set timeout timeoutlen=1000 ttimeoutlen=100

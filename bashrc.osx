@@ -27,21 +27,22 @@
 # for FILE in $(ls); do awk '/[eE]xception|ERROR/ { n++ }; END {print FILENAME" "n+0}' $FILE; done
 # for FILE in $(ls); do awk '/ERROR/ { n++ }; END {print FILENAME" "n+0}' $FILE; done
 
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
+PATH=/usr/local/share/python:$PATH
 
-# add non-system-installed python/ruby to path
-export PATH=/usr/local/Cellar/ruby/1.9.3-p125/bin:$PATH
-export PATH=/usr/local/opt/ruby/bin:$PATH
-export PATH=/usr/local/Cellar/python/2.7.3/bin:$PATH
-export PATH=/usr/local/share/python:$PATH
-export PATH=/usr/local/share/npm/bin:$PATH
+PATH=/usr/local/bin:$PATH
+PATH=/usr/local/sbin:$PATH
+
+# add non-system-installed ruby/node stuff to path
+PATH=/usr/local/opt/ruby/bin:$PATH
+PATH=/usr/local/share/npm/bin:$PATH
+export vi_cv_path_python=/usr/local/bin/python
 export NODE_PATH=/usr/local/lib/node_modules
 
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
 export ARCHFLAGS='-arch i386 -arch x86_64'
-export EDITOR='mvim -v'
+# use homebrew-installed vim
+export EDITOR='/usr/local/bin/vim'
 export LSCOLORS=DxGxcxdxBxegedabagacad
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -52,9 +53,6 @@ export LC_CTYPE=en_US.UTF-8
 shopt -s histappend
 stty -echoctl
 
-# use homebrew-installed MacVim
-alias vim='mvim -v'
-
 # git helpers
 alias trackfeatures='git fetch; for REMOTE in `git branch -r | grep feature `; do git checkout --track $REMOTE; done;'
 alias trackreleases='git fetch; for REMOTE in `git branch -r | grep release `; do git checkout --track $REMOTE; done;'
@@ -64,6 +62,8 @@ alias trackremotes='git fetch; for REMOTE in `git branch -r`; do git checkout --
 source /usr/local/etc/bash_completion.d/git-completion.bash
 source /usr/local/etc/bash_completion.d/git-prompt.sh
 # add virtualenvwrapper
+export VIRTUALENV_DISTRIBUTE=true
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/share/python/virtualenvwrapper.sh
 alias linkproject='setvirtualenvproject $VIRTUAL_ENV $(pwd)'
@@ -100,8 +100,8 @@ alias pypi="python setup.py register sdist upload"
 # shortcuts for starting/stopping services
 alias stopredis='launchctl unload -w $HOME/Library/LaunchAgents/homebrew.mxcl.redis.plist'
 alias startredis='launchctl load -w $HOME/Library/LaunchAgents/homebrew.mxcl.redis.plist'
-alias stopmysql='launchctl unload -w $HOME/Library/LaunchAgents/com.mysql.mysqld.plist'
-alias startmysql='launchctl load -w $HOME/Library/LaunchAgents/com.mysql.mysqld.plist'
+alias startmysql='launchctl load -w $HOME/Library/LaunchAgents/homebrew.mxcl.mysql.plist'
+alias stopmysql='launchctl unload -w $HOME/Library/LaunchAgents/homebrew.mxcl.mysql.plist'
 alias stopcouch='launchctl unload -w $HOME/Library/LaunchAgents/org.apache.couchdb.plist'
 alias startcouch='launchctl load -w $HOME/Library/LaunchAgents/org.apache.couchdb.plist'
 alias stopmongo='launchctl unload -w $HOME/Library/LaunchAgents/org.mongodb.mongod.plist'
@@ -112,12 +112,15 @@ alias startpostgres='pg_ctl -D /usr/local/var/postgres/data -l /usr/local/var/po
 alias stoppostgres='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 alias startjetty='/usr/local/Cellar/jetty/8.1.8/libexec/bin/jetty.sh start'
 alias stopjetty='/usr/local/Cellar/jetty/8.1.8/libexec/bin/jetty.sh stop'
+alias starttor='launchctl load -w $HOME/Library/LaunchAgents/homebrew.mxcl.tor.plist'
+alias stoptor='launchctl unload -w $HOME/Library/LaunchAgents/homebrew.mxcl.tor.plist'
 
 # shortcuts for remote machines
 alias datamine='ssh -L 5983:localhost:5984 ubuntu@datamine.txteagle.com'
 alias ucmp='ssh -L 5983:localhost:5984 ubuntu@ucmp.txteagle.com'
 alias pdb2='ssh -L 5983:localhost:5984 conductor@pdb2.txteagle.com'
 alias vaxlg='ssh -i ewheeler.pem ubuntu@ec2-50-17-51-57.compute-1.amazonaws.com'
+alias ckan='ssh -i ewheeler.pem ubuntu@ec2-174-129-253-28.compute-1.amazonaws.com'
 alias nimrod='ssh -L 5983:localhost:5984 root@keno.com.ng'
 alias sliderule='ssh -L 5983:localhost:5984 ewheeler@sliderule.dyndns.org'
 alias revere='ssh -p9 -levan 70.91.220.107'
@@ -132,7 +135,7 @@ alias tls='/usr/local/bin/todo.sh -d $HOME/.todo.cfg ls'
 alias tadd='/usr/local/bin/todo.sh -d $HOME/.todo.cfg add'
 
 # alias to site-packages
-alias sp='/usr/local/Cellar/python/2.7.2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages'
+alias sp='/usr/local/Cellar/python/2.7.5/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages'
 alias aka='/usr/local/lib/python2.7/site-packages'
 
 # amazon
