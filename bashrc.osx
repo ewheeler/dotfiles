@@ -27,6 +27,9 @@
 # for FILE in $(ls); do awk '/[eE]xception|ERROR/ { n++ }; END {print FILENAME" "n+0}' $FILE; done
 # for FILE in $(ls); do awk '/ERROR/ { n++ }; END {print FILENAME" "n+0}' $FILE; done
 
+# run script and then drop into python shell
+# ipython -i --c="%run script.py --autoreload"
+
 PATH=/usr/local/share/python:$PATH
 
 PATH=/usr/local/bin:$PATH
@@ -114,6 +117,8 @@ alias startjetty='/usr/local/Cellar/jetty/8.1.8/libexec/bin/jetty.sh start'
 alias stopjetty='/usr/local/Cellar/jetty/8.1.8/libexec/bin/jetty.sh stop'
 alias starttor='launchctl load -w $HOME/Library/LaunchAgents/homebrew.mxcl.tor.plist'
 alias stoptor='launchctl unload -w $HOME/Library/LaunchAgents/homebrew.mxcl.tor.plist'
+alias stopnginx='launchctl unload -w $HOME/Library/LaunchAgents/homebrew.mxcl.nginx.plist'
+alias startnginx='launchctl load -w $HOME/Library/LaunchAgents/homebrew.mxcl.nginx.plist'
 
 # shortcuts for remote machines
 alias datamine='ssh -L 5983:localhost:5984 ubuntu@datamine.txteagle.com'
