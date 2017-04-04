@@ -85,7 +85,7 @@ PATH=/usr/local/share/npm/bin:$PATH
 export GOPATH=/Users/ewheeler/go/
 
 export vi_cv_path_python=/usr/local/bin/python
-export HOMEBREW_GITHUB_API_TOKEN=f9325debf5c631e0f24d794387a5a062aec7cf81
+export HOMEBREW_GITHUB_API_TOKEN=65fbac1e64af11856c80e9b513e65b60999addb7
 
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
@@ -121,6 +121,8 @@ alias lsusb="ioreg -p IOUSB -w0 | sed 's/[^o]*o //; s/@.*$//' | grep -v '^Root.*
 # tunnel
 alias tunnel="ssh -C2qTnN -D 8080 apis@208.82.103.111"
 
+alias kafka="zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties & kafka-server-start /usr/local/etc/kafka/server.properties"
+
 # add nvm
 source $(brew --prefix nvm)/nvm.sh
 
@@ -131,8 +133,9 @@ source /usr/local/etc/bash_completion.d/git-prompt.sh
 export VIRTUALENV_DISTRIBUTE=true
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
 export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
 alias linkproject='setvirtualenvproject $VIRTUAL_ENV $(pwd)'
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
 # add pip completion
 _pip_completion()
 {
