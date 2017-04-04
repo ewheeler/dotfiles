@@ -142,6 +142,9 @@ highlight BadWhitespace ctermbg=red guibg=red
 " Display tabs at the beginning of a line in Python mode as bad.
 autocmd FileType python match BadWhitespace /^\t\+/
 
+" Don't left align comments in Python mode.
+autocmd FileType python set cinoptions+=#1 cinkeys-=0#
+
 " Make trailing whitespace be flagged as bad.
 match BadWhitespace /\s\+$/
 
